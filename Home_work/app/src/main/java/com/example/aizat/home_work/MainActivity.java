@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    // TODO Модификатор доступа
     Button button;
 
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO makeIntent
                 Intent intent = new Intent (MainActivity.this, SecondActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

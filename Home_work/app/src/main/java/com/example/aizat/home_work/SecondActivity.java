@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity{
 
+
+    // TODO Модификаторы доступа
     RadioGroup radioGroup;
     TextView textView;
     Button button;
@@ -35,7 +37,6 @@ public class SecondActivity extends AppCompatActivity{
         textView.setText(quenstions[0]); // выводит первый текст
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         getAnswers(0); // выводит первые ответы
-
 
         for (int i = 0; i < radioGroup.getChildCount();i++){
             ((RadioButton) radioGroup.getChildAt(i)).setText(getAnswer[i]);
@@ -63,6 +64,7 @@ public class SecondActivity extends AppCompatActivity{
                             concurrences++;
                         }
                     }
+                    // TODO makeIntent
                     Intent intent1 = new Intent (SecondActivity.this, ThirdActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent1.putExtra(KEY,concurrences);
@@ -78,6 +80,7 @@ public class SecondActivity extends AppCompatActivity{
     }
     private void getAnswers(int i){
         switch (i){
+            // TODO сделать через getIdentifier
             case 0: getAnswer = getResources().getStringArray(R.array.answers1); break;
             case 1: getAnswer = getResources().getStringArray(R.array.answers2); break;
             case 2: getAnswer = getResources().getStringArray(R.array.answers3); break;
@@ -91,6 +94,7 @@ public class SecondActivity extends AppCompatActivity{
             case 10: getAnswer = getResources().getStringArray(R.array.answers11); break;
         }
     }
+
     private int rbClick(){
         int radioButtonId = radioGroup.getCheckedRadioButtonId();
         int a;

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class ThirdActivity extends AppCompatActivity{
 
-
+    // TODO Модификаторы доступа
     final String KEY = "key";
 
     Button button;
@@ -31,6 +31,7 @@ public class ThirdActivity extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               // TODO makeIntent
                Intent intent = new Intent(ThirdActivity.this, MainActivity.class);
                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                startActivity(intent);
