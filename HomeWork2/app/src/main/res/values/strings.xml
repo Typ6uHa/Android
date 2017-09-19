@@ -4,7 +4,11 @@
     <string name="You_a_welcome">Добро пожаловать</string>
     <string name="next">дальше</string>
     <string name="repeat">заново?</string>
+    <string name="Exit">Выйти</string>
+    <string name="share">Хотите поделиться результатом?</string>
 
+    <string name="dialog_positive">Да</string>
+    <string name="dialog_negative">Нет</string>
 
     <string-array name="questions" >
         <item>9+4= ?</item>

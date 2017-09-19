@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,13 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Aizat on 19.09.2017.
  */
 
-public class QuestionFragment extends Fragment implements View.OnClickListener{
-
-    private SharedPreferences sharedPreferences;
+public class QuestionFragment extends Fragment {
 
     private final String KEY = "key";
 
@@ -29,14 +29,15 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
 
     private String[] getAnswer;
 
-    final String [] quenstions = getResources().getStringArray(R.array.questions);
-    final int [] rightAnswers = getResources().getIntArray(R.array.right_answers);
-    final int [] selectedAnswers =  new int [rightAnswers.length];
-
-    private int mCountSave;
+    private static int mCountSave = 0;
+    private static int result = 0;
 
     public static QuestionFragment newInstance() {
+
         Bundle args = new Bundle();
+
+        args.putInt("Count",mCountSave);
+        args.putInt("Result",result);
 
         QuestionFragment fragment = new QuestionFragment();
         fragment.setArguments(args);
@@ -47,17 +48,44 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_question,container, false);
 
+        final String [] questions = getResources().getStringArray(R.array.questions);
+        final int [] rightAnswers = getResources().getIntArray(R.array.right_answers);
+
+        mCountSave = getArguments().getInt("Count");
+        result = getArguments().getInt("Result");
+
         textView = view.findViewById(R.id.question);
-        textView.setText(quenstions[mCountSave]); // выводит первый текст
+        textView.setText(questions[mCountSave]);
         radioGroup = view.findViewById(R.id.radioGroup);
+
         for (int i = 0; i < radioGroup.getChildCount();i++){
             getAnswers(i);
             ((RadioButton) radioGroup.getChildAt(i)).setText(getAnswer[mCountSave]);
         }
-        mCountSave++;
-        selectedAnswers[mCountSave] = rbClick();
+
         button = view.findViewById(R.id.go_to_result);
-        button.setOnClickListener(this);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mCountSave < questions.length-1) {
+
+                    if (rightAnswers [mCountSave] == rbClick()){
+                        result++;
+                    }
+
+                    radioGroup.clearCheck();
+
+                    mCountSave++;
+
+                    changeQuestion();
+                } else {
+                    if (rightAnswers [mCountSave] == rbClick()){
+                        result++;
+                    }
+                    goToFinish(result);
+                }
+            }
+        });
         return view;
     }
 
@@ -96,19 +124,4 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         startActivity(intent);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (mCountSave-1 < quenstions.length) {
-            radioGroup.clearCheck();
-            changeQuestion();
-        } else {
-            int correct = 0;
-            for (int z = 0; z < selectedAnswers.length;z++){
-                if(rightAnswers[z] == (selectedAnswers[z])){
-                    correct++;
-                }
-            }
-            goToFinish(correct);
-        }
-    }
 }
