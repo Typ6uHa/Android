@@ -17,7 +17,7 @@ import android.view.View;
 
 public class AllertDialogExit extends DialogFragment implements DialogInterface.OnClickListener {
 
-    private Uri uri = Uri.parse("https://vk.com/id62469503");
+    private Uri uri = Uri.parse("http://dropmefiles.com/8tZ7f");
     private int a;
     private int b;
     public AllertDialogExit(int a, int b) {
@@ -43,7 +43,7 @@ public class AllertDialogExit extends DialogFragment implements DialogInterface.
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Я ответил на "+ a+
-                        " вопросов из "+ b + ". Попробуй повтори. (Ссылка на скачивание у меня)"
+                        " вопросов из "+ b + ". Попробуй повтори."
                         + "\n"+ uri);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
