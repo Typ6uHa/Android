@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">HomeWork2</string>
+    <string name="Start">Начать</string>
+    <string name="You_a_welcome">Добро пожаловать</string>
+    <string name="next">дальше</string>
+    <string name="repeat">заново?</string>
+
+
+    <string-array name="questions" >
+        <item>9+4= ?</item>
+        <item>7+7= ?</item>
+        <item>13+2= ?</item>
+        <item>1+1= ?</item>
+        <item>8+8 = ?</item>
+        <item>24+25= ?</item>
+        <item>4*4= ?</item>
+        <item>4+9= ?</item>
+        <item>5*5= ?</item>
+        <item>7*7= ?</item>
+        <item>10*10= ?</item>
+    </string-array>
+
+    <string-array name="answerFirst">
+        <item>9</item>
+        <item>7</item>
+        <item>15</item>
+        <item>1</item>
+        <item>4</item>
+        <item>7</item>
+        <item>8</item>
+        <item>13</item>
+        <item>5</item>
+        <item>49</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="answerSecond">
+        <item>13</item>
+        <item>13</item>
+        <item>14</item>
+        <item>2</item>
+        <item>8</item>
+        <item>49</item>
+        <item>16</item>
+        <item>4</item>
+        <item>1</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="answerThird">
+        <item>7</item>
+        <item>14</item>
+        <item>16</item>
+        <item>19</item>
+        <item>16</item>
+        <item>14</item>
+        <item>2</item>
+        <item>9</item>
+        <item>25</item>
+        <item>4</item>
+        <item>200</item>
+    </string-array>
+
+    <integer-array name="right_answers">
+        <item>2</item>
+        <item>3</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>3</item>
+        <item>1</item>
+        <item>1</item>
+    </integer-array>
+</resources>
