@@ -17,6 +17,7 @@ import android.view.View;
 
 public class AllertDialogExit extends DialogFragment implements DialogInterface.OnClickListener {
 
+    // TODO в стринги
     private Uri uri = Uri.parse("http://dropmefiles.com/8tZ7f");
     private int a;
     private int b;
@@ -42,13 +43,16 @@ public class AllertDialogExit extends DialogFragment implements DialogInterface.
             case DialogInterface.BUTTON_POSITIVE:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
+                // TODO в стринги
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Я ответил на "+ a+
                         " вопросов из "+ b + ". Попробуй повтори."
                         + "\n"+ uri);
+                // TODO в константы
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
+                // TODO хм, усложнение , можно сделать проще
                 android.os.Process.killProcess(android.os.Process.myPid());
                 break;
         }

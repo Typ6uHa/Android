@@ -40,6 +40,7 @@ public class FinishFragment extends Fragment {
         restart = view.findViewById(R.id.repeat);
         exit = view.findViewById(R.id.goOut);
         textView = view.findViewById(R.id.result);
+        // TODO в константы
         final int count = getArguments().getInt("key");
         final int questions = getResources().getIntArray(R.array.right_answers).length;
         textView.setText(String.valueOf(count)+" / "+questions);
@@ -51,6 +52,7 @@ public class FinishFragment extends Fragment {
                 fragment.show(getFragmentManager(),TAG_NEXT_STEP);
             }
         });
+
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

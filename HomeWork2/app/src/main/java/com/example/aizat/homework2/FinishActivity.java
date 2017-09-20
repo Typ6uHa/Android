@@ -16,10 +16,10 @@ public class FinishActivity extends FragmentHostActivity {
     protected Fragment getFragment() {
         return FinishFragment.newInstance(getData());
     }
+
     private Bundle getData() {
         Intent intent = getIntent();
         int result = intent.getIntExtra(KEY,0);
-
         Bundle dataForFragment = new Bundle();
         dataForFragment.putInt(KEY,result);
         return dataForFragment;

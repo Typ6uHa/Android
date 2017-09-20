@@ -29,13 +29,14 @@ public class QuestionFragment extends Fragment {
 
     private String[] getAnswer;
 
+    // TODO Static переменные - плохо. Передавать данные через агрументы (Bundle) - хорошо
     private static int mCountSave = 0;
     private static int result = 0;
 
     public static QuestionFragment newInstance() {
-
         Bundle args = new Bundle();
 
+        // TODO в константы
         args.putInt("Count",mCountSave);
         args.putInt("Result",result);
 
@@ -51,6 +52,7 @@ public class QuestionFragment extends Fragment {
         final String [] questions = getResources().getStringArray(R.array.questions);
         final int [] rightAnswers = getResources().getIntArray(R.array.right_answers);
 
+        // TODO в константы
         mCountSave = getArguments().getInt("Count");
         result = getArguments().getInt("Result");
 
@@ -91,6 +93,7 @@ public class QuestionFragment extends Fragment {
 
     private void getAnswers(int i ){
         switch (i){
+            // TODO getIdentifier
             case 0: getAnswer = getResources().getStringArray(R.array.answerFirst); break;
             case 1: getAnswer = getResources().getStringArray(R.array.answerSecond); break;
             case 2: getAnswer = getResources().getStringArray(R.array.answerThird); break;
@@ -117,6 +120,7 @@ public class QuestionFragment extends Fragment {
     }
 
     public void goToFinish(int a){
+        // TODO makeIntent
         Intent intent = new Intent(getActivity(),FinishActivity.class);
         intent.putExtra(KEY,a);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

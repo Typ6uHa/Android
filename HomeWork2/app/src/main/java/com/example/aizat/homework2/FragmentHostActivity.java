@@ -29,6 +29,7 @@ public abstract class FragmentHostActivity extends AppCompatActivity {
     protected int getLayoutResId(){
         return R.layout.activity_fragment_host;
     }
+
     private int getContainerId(){
         return R.id.fragment_container;
     }
