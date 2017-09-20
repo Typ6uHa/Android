@@ -18,8 +18,8 @@ public class FinishActivity extends FragmentHostActivity {
     }
     private Bundle getData() {
         Intent intent = getIntent();
+        // TODO дефонлтное значение(0) в константы
         int result = intent.getIntExtra(KEY,0);
-
         Bundle dataForFragment = new Bundle();
         dataForFragment.putInt(KEY,result);
         return dataForFragment;
