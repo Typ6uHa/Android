@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 
 public class EmptyActivity extends AppCompatActivity {
 
+    // TODO Все ок, но не хватает работы с ViewPager и PagerIndicator. Да, пустые страницы , но они должны свайпаться (как в проекте на паре).
+
     public static Intent makeIntent (Context context){
         return new Intent (context, EmptyActivity.class);
     }

@@ -37,6 +37,7 @@ public class EventListAdapter extends RecyclerView.Adapter <EventViewHolder> {
         holder.photoImageView.setImageResource(event.getPhotoId());
         holder.titleTextView.setText(event.getTitle());
         holder.descriptionTextView.setText(event.getDescription());
+        // TODO можно отформатировать с помощью SimpleDateFormat
         holder.dataTextView.setText(event.getDate().toString());
     }
 
