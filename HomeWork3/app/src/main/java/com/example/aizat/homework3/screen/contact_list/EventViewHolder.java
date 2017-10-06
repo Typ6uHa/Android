@@ -1,9 +1,12 @@
-package com.example.aizat.homework3;
+package com.example.aizat.homework3.screen.contact_list;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.aizat.homework3.R;
 
 public class EventViewHolder extends RecyclerView.ViewHolder {
 

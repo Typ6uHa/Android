@@ -1,10 +1,11 @@
-package com.example.aizat.homework3;
+package com.example.aizat.homework3.screen.contact_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.aizat.homework3.R;
 import com.example.aizat.homework3.model.Event;
 
 import java.util.List;
@@ -37,8 +38,7 @@ public class EventListAdapter extends RecyclerView.Adapter <EventViewHolder> {
         holder.photoImageView.setImageResource(event.getPhotoId());
         holder.titleTextView.setText(event.getTitle());
         holder.descriptionTextView.setText(event.getDescription());
-        // TODO можно отформатировать с помощью SimpleDateFormat
-        holder.dataTextView.setText(event.getDate().toString());
+        holder.dataTextView.setText(event.getDate());
     }
 
     @Override

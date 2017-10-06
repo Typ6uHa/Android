@@ -1,13 +1,13 @@
-package com.example.aizat.homework3;
+package com.example.aizat.homework3.screen.contact_list;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
+import com.example.aizat.homework3.screen.event_pager.EventPagerActivity;
+import com.example.aizat.homework3.R;
 import com.example.aizat.homework3.model.Event;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class EventViewListActivity extends AppCompatActivity implements OnItemCl
 
     @Override
     public void onClick(int position) {
-        startActivity(EmptyActivity.makeIntent(this));
+        startActivity(EventPagerActivity.makeIntent(this, position, (ArrayList<Event>) events));
     }
 
     private List<Event> getEvents() {
