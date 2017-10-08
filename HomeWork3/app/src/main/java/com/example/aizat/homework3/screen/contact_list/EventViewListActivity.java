@@ -53,15 +53,18 @@ public class EventViewListActivity extends AppCompatActivity implements OnItemCl
 
         List <Event> events = new ArrayList<>();
 
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 0 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 1 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 2 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 3 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 4 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 5 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 6 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 7 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 8 часов. Было солнечено",new Date()));
         events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 9 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 10 часов. Было солнечено",new Date()));
+        events.add(new Event(0,R.mipmap.ic_launcher_round,"проснулся","Сегодня проснулся в 11 часов. Было солнечено",new Date()));
         return events;
     }
 }

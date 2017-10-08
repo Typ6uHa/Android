@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.aizat.homework3.R;
 import com.example.aizat.homework3.custom_view.PagerIndicator;
@@ -49,7 +51,7 @@ public class EventPagerActivity extends AppCompatActivity {
         adapter = new EventPagerAdapter(getSupportFragmentManager(), events);
 
         pagerIndicator = (PagerIndicator) findViewById(R.id.pager_indicator);
-        pagerIndicator.setItemCount(events.size());
+        pagerIndicator.setItemCount(events.size(),getIntent().getIntExtra(KEY_POSITION,0));
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(adapter);
@@ -61,6 +63,7 @@ public class EventPagerActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                pagerIndicator.setCurrentPosition(position);
             }
 
             @Override

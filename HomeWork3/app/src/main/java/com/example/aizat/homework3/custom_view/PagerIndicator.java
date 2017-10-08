@@ -5,6 +5,7 @@ import android.media.Image;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -38,18 +39,17 @@ public class PagerIndicator extends LinearLayout {
         setGravity(Gravity.CENTER);
     }
 
-    public void setItemCount(int count){
+    public void setItemCount(int count, int currentPosition){
         removeAllViews();
         for (int i = 0; i < count; i++){
             ImageView imageView = new ImageView(getContext());
             imageView.setImageResource(R.drawable.indicator_unactive);
             addView(imageView);
         }
-        currentPosition = 0;
         setCurrentPosition(currentPosition);
     }
 
-    private void setCurrentPosition(int position) {
+    public void setCurrentPosition(int position) {
         if (position >= 0 && position < getChildCount()){
             ((ImageView)getChildAt(currentPosition)).setImageResource(R.drawable.indicator_unactive);
             currentPosition = position;
