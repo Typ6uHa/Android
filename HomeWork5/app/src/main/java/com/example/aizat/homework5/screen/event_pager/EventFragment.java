@@ -62,7 +62,7 @@ public class EventFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel" + event.getNumber()));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + event.getNumber()));
                 startActivity(intent);
             }
         });
