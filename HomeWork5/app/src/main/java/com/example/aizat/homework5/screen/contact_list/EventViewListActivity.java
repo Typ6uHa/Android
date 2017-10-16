@@ -55,11 +55,11 @@ public class EventViewListActivity extends AppCompatActivity implements OnItemCl
         List <Event> events = new ArrayList<>();
 
         events.add(new Event(0,R.mipmap.ic_launcher_round,"Ух какое событие","Надо позвонить маме",new Date(),"8(903)388-69-94"));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"Ух какое событие1","Надо позвонить бабуле",new Date(),"8(965)584-80-83"));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"Ух какое событие2","Надо позвонить папе",new Date(),"8(903)388-69-93"));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"Ух какое событие3","позвоню ка себе",new Date(),"8(960)045-08-12"));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"Ух какое событие4","позвоню на левый номер",new Date(),"8(800)555-35-35"));
-        events.add(new Event(0,R.mipmap.ic_launcher_round,"Ух какое событие5","позвоню на левый номер",new Date(),"8(800)555-35-35"));
+        events.add(new Event(1,R.mipmap.ic_launcher_round,"Ух какое событие1","Надо позвонить бабуле",new Date(),"8(965)584-80-83"));
+        events.add(new Event(2,R.mipmap.ic_launcher_round,"Ух какое событие2","Надо позвонить папе",new Date(),"8(903)388-69-93"));
+        events.add(new Event(3,R.mipmap.ic_launcher_round,"Ух какое событие3","позвоню ка себе",new Date(),"8(960)045-08-12"));
+        events.add(new Event(4,R.mipmap.ic_launcher_round,"Ух какое событие4","позвоню на левый номер",new Date(),"8(800)555-35-35"));
+        events.add(new Event(5,R.mipmap.ic_launcher_round,"Ух какое событие5","позвоню на левый номер",new Date(),"8(800)555-35-35"));
         return events;
     }
 }
