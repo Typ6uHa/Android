@@ -20,54 +20,62 @@
             android:text="@string/choose_days"
             android:textSize="32sp" />
 
-        <RadioGroup
+        <LinearLayout
+            android:orientation="vertical"
             android:id="@+id/radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/choose_day">
 
             <CheckBox
+                android:transitionName="@string/Monday"
                 android:id="@+id/monday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Monday" />
 
             <CheckBox
+                android:transitionName="@string/Tuesday"
                 android:id="@+id/tuesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Tuesday" />
 
             <CheckBox
+                android:transitionName="@string/Wednesday"
                 android:id="@+id/wednesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Wednesday" />
 
             <CheckBox
+                android:transitionName="@string/Thursday"
                 android:id="@+id/Thursday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Thursday" />
 
             <CheckBox
+                android:transitionName="@string/Friday"
                 android:id="@+id/friday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Friday" />
 
             <CheckBox
+                android:transitionName="@string/Saturday"
                 android:id="@+id/saturday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Saturday" />
 
             <CheckBox
+                android:transitionName="@string/Sunday"
                 android:id="@+id/sunday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Sunday" />
-        </RadioGroup>
+        </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floating_action_bar1"

@@ -1,5 +1,6 @@
 package com.example.aizat.alarmclock.screen.main.first;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.example.aizat.alarmclock.R;
 import com.example.aizat.alarmclock.model.database.DatabaseHelper;
 import com.example.aizat.alarmclock.model.entity.AlarmItem;
 import com.example.aizat.alarmclock.screen.base.BaseFragment;
+import com.example.aizat.alarmclock.screen.main.second.SecondActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
  * Created by Aizat on 20.10.2017.
  */
 
-class MainFragment extends BaseFragment {
+class MainFragment extends BaseFragment{
 
     private RecyclerView recyclerView;
 
@@ -60,19 +62,8 @@ class MainFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_main, container,false);
 
-        List<AlarmItem> alarmItems = new ArrayList<>();
-
-        alarmItems.add(new AlarmItem("13:00","'понедельник, среда, четверг'",1));
-        alarmItems.add(new AlarmItem("13:00","'понедельник, среда, четверг'",1));
-        alarmItems.add(new AlarmItem("13:00","'понедельник, среда, четверг'",1));
-        alarmItems.add(new AlarmItem("13:00","'понедельник, среда, четверг'",1));
-
-        for(int i = 0; i < alarmItems.size();i++){
-            databaseHelper.insertAlarmItem(alarmItems.get(i));
-        }
-
         linearLayoutManager = new LinearLayoutManager(getActivity());
-        adapter = new MainAdapter(alarmItems);
+        adapter = new MainAdapter();
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);

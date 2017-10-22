@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
@@ -34,7 +35,6 @@ public class SecondFragment extends BaseFragment {
     private FloatingActionButton floatingActionButton;
 
     private TimePicker timePicker;
-    private RadioGroup radioGroup;
 
     private DatabaseHelper databaseHelper;
 
@@ -60,11 +60,13 @@ public class SecondFragment extends BaseFragment {
         final Calendar calendar = Calendar.getInstance();
 
         timePicker = view.findViewById(R.id.time_picker);
-        radioGroup = view.findViewById(R.id.radio);
+        timePicker.setIs24HourView(true);
+
         floatingActionButton = view.findViewById(R.id.floating_action_bar1);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 calendar.set(Calendar.HOUR_OF_DAY,timePicker.getHour());
                 calendar.set(Calendar.MINUTE,timePicker.getMinute());
 
@@ -73,10 +75,6 @@ public class SecondFragment extends BaseFragment {
 
                 String hour_string = String.valueOf(hour);
                 String minute_string = String.valueOf(minute);
-
-                if (hour > 12){
-                    hour_string = String.valueOf(hour -12);
-                }
 
                 if (minute < 10){
                     minute_string ="0" + String.valueOf(minute);
@@ -95,11 +93,37 @@ public class SecondFragment extends BaseFragment {
     }
     private String getDays(){
         String answer = "'";
-        for(int i = 0; i < radioGroup.getChildCount(); i++){
-            if (radioGroup.getChildAt(i).isEnabled()){
-                answer += radioGroup.getChildAt(i).getTransitionName() +", ";
-            }
+
+        CheckBox checkBox1 = getView().findViewById(R.id.monday);
+        CheckBox checkBox2 = getView().findViewById(R.id.tuesday);
+        CheckBox checkBox3 = getView().findViewById(R.id.wednesday);
+        CheckBox checkBox4 = getView().findViewById(R.id.Thursday);
+        CheckBox checkBox5 = getView().findViewById(R.id.friday);
+        CheckBox checkBox6 = getView().findViewById(R.id.saturday);
+        CheckBox checkBox7 = getView().findViewById(R.id.sunday);
+
+        if (checkBox1.isChecked()){
+            answer += checkBox1.getText()+", ";
         }
+        if (checkBox2.isChecked()){
+            answer += checkBox2.getText()+", ";
+        }
+        if (checkBox3.isChecked()){
+            answer += checkBox3.getText()+", ";
+        }
+        if (checkBox4.isChecked()){
+            answer += checkBox4.getText()+", ";
+        }
+        if (checkBox5.isChecked()){
+            answer += checkBox5.getText()+", ";
+        }
+        if (checkBox6.isChecked()){
+            answer += checkBox6.getText()+", ";
+        }
+        if (checkBox7.isChecked()){
+            answer += checkBox7.getText();
+        }
+
         return answer+"'";
     }
 }

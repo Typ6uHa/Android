@@ -38,6 +38,7 @@ public class AlarmItemWrapper extends CursorWrapper {
             alarmItem.setTime(getString(getColumnIndex(AlarmItemTable.COLUMN_TIME)));
             alarmItem.setDescription(getString(getColumnIndex(AlarmItemTable.COLUMN_DESCRIPTION)));
             alarmItem.setSwitchedOn(getInt(getColumnIndex(AlarmItemTable.COLUMN_SWITCH)));
+            return alarmItem;
         }
         return null;
     }

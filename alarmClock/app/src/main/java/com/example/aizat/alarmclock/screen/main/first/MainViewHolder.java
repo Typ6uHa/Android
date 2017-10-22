@@ -27,5 +27,6 @@ class MainViewHolder extends RecyclerView.ViewHolder {
         description = itemView.findViewById(R.id.description);
 
         switchCompat = itemView.findViewById(R.id.switch_main);
+
     }
 }
