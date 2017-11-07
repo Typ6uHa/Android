@@ -10,7 +10,7 @@ import java.sql.Blob;
  * Created by Aizat on 21.10.2017.
  */
 
-public class AlarmItem {
+public class AlarmItem implements Parcelable {
 
     private String time;
 
@@ -18,15 +18,50 @@ public class AlarmItem {
 
     private String description;
 
-    public AlarmItem() {
+    private int id;
+
+    public AlarmItem (){
+
     }
 
-    public AlarmItem(String time, String description, int isSwitchedOn) {
+    public AlarmItem(String time, String description,int isSwitchedOn, int id) {
         this.time = time;
-        this.isSwitchedOn = isSwitchedOn;
         this.description = description;
+        this.isSwitchedOn = isSwitchedOn;
+        this.id = id;
     }
 
+    protected AlarmItem(Parcel in) {
+        time = in.readString();
+        description = in.readString();
+        isSwitchedOn = in.readInt();
+        id = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(time);
+        dest.writeString(description);
+        dest.writeInt(isSwitchedOn);
+        dest.writeInt(id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<AlarmItem> CREATOR = new Creator<AlarmItem>() {
+        @Override
+        public AlarmItem createFromParcel(Parcel in) {
+            return new AlarmItem(in);
+        }
+
+        @Override
+        public AlarmItem[] newArray(int size) {
+            return new AlarmItem[size];
+        }
+    };
 
     public String getTime() {
         return time;
@@ -40,8 +75,8 @@ public class AlarmItem {
         return isSwitchedOn;
     }
 
-    public void setSwitchedOn(int switchedOn) {
-        isSwitchedOn = switchedOn;
+    public void setSwitchedOn(int isSwitchedOn) {
+        this.isSwitchedOn = isSwitchedOn;
     }
 
     public String getDescription() {
@@ -50,5 +85,13 @@ public class AlarmItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

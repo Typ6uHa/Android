@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 import com.example.aizat.alarmclock.R;
+import com.example.aizat.alarmclock.model.entity.AlarmItem;
 import com.example.aizat.alarmclock.screen.base.BaseActivity;
 
 /**
@@ -16,16 +17,23 @@ import com.example.aizat.alarmclock.screen.base.BaseActivity;
 
 public class SecondActivity extends BaseActivity {
 
+    private final String ALARM_ITEM_REQUEST = "fsfasad";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+    private Bundle getData() {
+        Intent intent = getIntent();
+        Bundle dataForFragment = new Bundle();
+        dataForFragment.putParcelable(ALARM_ITEM_REQUEST,intent.getParcelableExtra(ALARM_ITEM_REQUEST));
+        return dataForFragment;
+    }
 
     @NonNull
     @Override
     protected Fragment makeFragment() {
-        return SecondFragment.newInstance();
+        return SecondFragment.newInstance(getData());
     }
 }

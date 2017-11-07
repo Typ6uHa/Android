@@ -19,7 +19,7 @@ class MainViewHolder extends RecyclerView.ViewHolder {
 
     public SwitchCompat switchCompat;
 
-    public MainViewHolder(View itemView) {
+    public MainViewHolder(View itemView, final OnItemClickListener onItemClickListener) {
         super(itemView);
 
         time = itemView.findViewById(R.id.time);
@@ -27,6 +27,16 @@ class MainViewHolder extends RecyclerView.ViewHolder {
         description = itemView.findViewById(R.id.description);
 
         switchCompat = itemView.findViewById(R.id.switch_main);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onClick(getAdapterPosition());
+                }
+            }
+        });
+
 
     }
 }

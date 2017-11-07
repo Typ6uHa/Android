@@ -1,5 +1,7 @@
 package com.example.aizat.alarmclock.screen.main.first;
 
+import com.example.aizat.alarmclock.model.entity.AlarmItem;
+
 /**
  * Created by Aizat on 22.10.2017.
  */

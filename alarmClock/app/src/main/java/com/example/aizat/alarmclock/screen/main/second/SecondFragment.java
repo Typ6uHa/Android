@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.aizat.alarmclock.R;
 import com.example.aizat.alarmclock.model.database.DatabaseHelper;
@@ -31,17 +32,21 @@ import java.sql.Blob;
 
 public class SecondFragment extends BaseFragment {
 
-    private final static String KEY = "key";
+    private final String ALARM_ITEM_REQUEST = "fsfasad";
+
     private FloatingActionButton floatingActionButton;
 
     private TimePicker timePicker;
 
     private DatabaseHelper databaseHelper;
 
-    public static SecondFragment newInstance() {
-        Bundle args = new Bundle();
+    private AlarmItem alarmItem;
+
+    private Calendar calendar;
+
+    public static SecondFragment newInstance(Bundle data) {
         SecondFragment fragment = new SecondFragment();
-        fragment.setArguments(args);
+        fragment.setArguments(data);
         return fragment;
     }
 
@@ -49,7 +54,7 @@ public class SecondFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        databaseHelper = new DatabaseHelper(getActivity());
+        databaseHelper = new DatabaseHelper(getContext());
     }
 
     @Nullable
@@ -57,35 +62,51 @@ public class SecondFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second,container,false);
 
-        final Calendar calendar = Calendar.getInstance();
+        alarmItem = getArguments().getParcelable(ALARM_ITEM_REQUEST);
+
+        calendar = Calendar.getInstance();
 
         timePicker = view.findViewById(R.id.time_picker);
         timePicker.setIs24HourView(true);
 
         floatingActionButton = view.findViewById(R.id.floating_action_bar1);
+//
+//        if (alarmItem != null){
+//            Toast.makeText(getContext(),String.valueOf(alarmItem.getId()),Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(getContext(),"Я долбаеб ", Toast.LENGTH_LONG).show();
+//        }
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                calendar.set(Calendar.HOUR_OF_DAY,timePicker.getHour());
-                calendar.set(Calendar.MINUTE,timePicker.getMinute());
+                    calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
+                    calendar.set(Calendar.MINUTE, timePicker.getMinute());
 
-                int hour = timePicker.getHour();
-                int minute = timePicker.getMinute();
+                    int hour = timePicker.getHour();
+                    int minute = timePicker.getMinute();
 
-                String hour_string = String.valueOf(hour);
-                String minute_string = String.valueOf(minute);
+                    String hour_string = String.valueOf(hour);
+                    String minute_string = String.valueOf(minute);
 
-                if (minute < 10){
-                    minute_string ="0" + String.valueOf(minute);
-                }
+                    if (minute < 10) {
+                        minute_string = "0" + String.valueOf(minute);
+                    }
 
-                String time = hour_string+":"+minute_string;
+                    String time = hour_string + ":" + minute_string;
 
-                databaseHelper.insertAlarmItem(new AlarmItem(time,getDays(),1));
+                    if (alarmItem == null) {
+                        databaseHelper.insertAlarmItem(new AlarmItem(time, getDays(), 1, (int) System.currentTimeMillis()));
+                    } else {
+                            alarmItem.setTime(time);
+                            alarmItem.setDescription(getDays());
+                            alarmItem.setSwitchedOn(1);
+                            databaseHelper.updateAlarmItem(alarmItem);
+                        }
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
 
-                Intent intent = new Intent(getContext(),MainActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -103,25 +124,25 @@ public class SecondFragment extends BaseFragment {
         CheckBox checkBox7 = getView().findViewById(R.id.sunday);
 
         if (checkBox1.isChecked()){
-            answer += checkBox1.getText()+", ";
+            answer += checkBox1.getText();
         }
         if (checkBox2.isChecked()){
-            answer += checkBox2.getText()+", ";
+            answer += " "+checkBox2.getText();
         }
         if (checkBox3.isChecked()){
-            answer += checkBox3.getText()+", ";
+            answer += " "+checkBox3.getText();
         }
         if (checkBox4.isChecked()){
-            answer += checkBox4.getText()+", ";
+            answer += " "+checkBox4.getText();
         }
         if (checkBox5.isChecked()){
-            answer += checkBox5.getText()+", ";
+            answer += " "+checkBox5.getText();
         }
         if (checkBox6.isChecked()){
-            answer += checkBox6.getText()+", ";
+            answer += " "+checkBox6.getText();
         }
         if (checkBox7.isChecked()){
-            answer += checkBox7.getText();
+            answer += " "+checkBox7.getText();
         }
 
         return answer+"'";

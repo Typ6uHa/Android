@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String NAME = "data.db";
+    public static final String NAME = "data.dbb";
 
     public static int VERSION = 1;
 
@@ -53,4 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         getWritableDatabase().execSQL(AlarmItemTable.getDeleteQuery());
     }
 
+    public void updateAlarmItem(AlarmItem alarmItem){
+        getWritableDatabase().execSQL(AlarmItemTable.updateAlarm(alarmItem));
+    }
 }

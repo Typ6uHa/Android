@@ -13,14 +13,12 @@ import com.example.aizat.alarmclock.screen.main.second.SecondActivity;
 
 public class MainActivity extends BaseActivity {
 
-    private final static String KEY = "key";
-
     private FloatingActionButton floatingActionButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_action_bar);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

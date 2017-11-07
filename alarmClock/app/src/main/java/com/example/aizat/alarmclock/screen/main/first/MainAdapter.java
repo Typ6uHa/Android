@@ -21,18 +21,26 @@ class MainAdapter extends RecyclerView.Adapter<MainViewHolder>{
 
     private List<AlarmItem> alarmItems;
 
+    private OnItemClickListener onItemClickListener;
+
     public MainAdapter() {
         this.alarmItems = new ArrayList<>();
     }
 
-    public MainAdapter(List<AlarmItem> alarmItems) {
+    public MainAdapter(OnItemClickListener onItemClickListener) {
+        this.alarmItems = new ArrayList<>();
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public MainAdapter(List<AlarmItem> alarmItems,OnItemClickListener onItemClickListener) {
         this.alarmItems = alarmItems;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
     public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main,parent,false);
-        return new MainViewHolder(view);
+        return new MainViewHolder(view,onItemClickListener);
     }
 
     @Override
@@ -46,7 +54,7 @@ class MainAdapter extends RecyclerView.Adapter<MainViewHolder>{
             holder.switchCompat.setChecked(true);
         } else {
             holder.switchCompat.setChecked(false);
-        }
+        };
     }
 
     @Override
@@ -57,5 +65,8 @@ class MainAdapter extends RecyclerView.Adapter<MainViewHolder>{
     public void setAlarmItems(@NonNull List<AlarmItem> alarmItems){
         this.alarmItems = alarmItems;
         notifyDataSetChanged();
+    }
+    public AlarmItem getAlarmItem(int position){
+        return alarmItems.get(position);
     }
 }

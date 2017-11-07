@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.aizat.alarmclock.R;
 import com.example.aizat.alarmclock.model.database.DatabaseHelper;
@@ -27,7 +28,9 @@ import java.util.List;
  * Created by Aizat on 20.10.2017.
  */
 
-class MainFragment extends BaseFragment{
+class MainFragment extends BaseFragment implements OnItemClickListener{
+
+    private final String ALARM_ITEM_REQUEST = "fsfasad";
 
     private RecyclerView recyclerView;
 
@@ -38,9 +41,9 @@ class MainFragment extends BaseFragment{
     private DatabaseHelper databaseHelper;
 
     public static MainFragment newInstance() {
-        Bundle args = new Bundle();
+        Bundle data = new Bundle();
         MainFragment fragment = new MainFragment();
-        fragment.setArguments(args);
+        fragment.setArguments(data);
         return fragment;
     }
 
@@ -59,15 +62,14 @@ class MainFragment extends BaseFragment{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_main, container,false);
 
         linearLayoutManager = new LinearLayoutManager(getActivity());
-        adapter = new MainAdapter();
+        adapter = new MainAdapter(this);
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
-
         return view;
     }
 
@@ -96,5 +98,15 @@ class MainFragment extends BaseFragment{
        }
        return true;
     }
+
+    @Override
+    public void onClick(int position) {
+        Toast.makeText(getContext(),String.valueOf(adapter.getAlarmItem(position).getId()),Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(),SecondActivity.class);
+        intent.putExtra(ALARM_ITEM_REQUEST,adapter.getAlarmItem(position));
+        startActivity(intent);
+    }
+
+// gregorianCalendar
 }
 

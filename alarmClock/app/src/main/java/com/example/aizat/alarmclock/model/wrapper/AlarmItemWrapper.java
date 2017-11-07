@@ -32,12 +32,13 @@ public class AlarmItemWrapper extends CursorWrapper {
     }
 
     @Nullable
-    private AlarmItem getAlarmItem(){
+    public AlarmItem getAlarmItem(){
         if(!isBeforeFirst() && !isAfterLast()) {
             AlarmItem alarmItem = new AlarmItem();
             alarmItem.setTime(getString(getColumnIndex(AlarmItemTable.COLUMN_TIME)));
             alarmItem.setDescription(getString(getColumnIndex(AlarmItemTable.COLUMN_DESCRIPTION)));
             alarmItem.setSwitchedOn(getInt(getColumnIndex(AlarmItemTable.COLUMN_SWITCH)));
+            alarmItem.setId(getInt(getColumnIndex(AlarmItemTable.COLUMN_ID)));
             return alarmItem;
         }
         return null;
