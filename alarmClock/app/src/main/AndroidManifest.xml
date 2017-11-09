@@ -17,6 +17,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".screen.main.second.SecondActivity"/>
+        <activity
+            android:name=".screen.main.third.StopActivity">
+            </activity>
+        <receiver android:name=".screen.main.first.wakeUp.AlarmOff"/>
+        <service android:name=".screen.main.first.wakeUp.RingtonePlayingService"
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>

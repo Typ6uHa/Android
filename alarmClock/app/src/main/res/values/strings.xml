@@ -10,4 +10,5 @@
     <string name="Friday">Пятница</string>
     <string name="Sunday">Воскресенье</string>
     <string name="Saturday">Суббота</string>
+    <string name="stop">Остановить будильник</string>
 </resources>

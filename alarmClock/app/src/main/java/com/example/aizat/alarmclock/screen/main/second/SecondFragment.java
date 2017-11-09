@@ -1,8 +1,10 @@
 package com.example.aizat.alarmclock.screen.main.second;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
@@ -70,12 +72,6 @@ public class SecondFragment extends BaseFragment {
         timePicker.setIs24HourView(true);
 
         floatingActionButton = view.findViewById(R.id.floating_action_bar1);
-//
-//        if (alarmItem != null){
-//            Toast.makeText(getContext(),String.valueOf(alarmItem.getId()),Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(getContext(),"Я долбаеб ", Toast.LENGTH_LONG).show();
-//        }
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,11 +89,14 @@ public class SecondFragment extends BaseFragment {
                     if (minute < 10) {
                         minute_string = "0" + String.valueOf(minute);
                     }
-
+                    if (hour < 10){
+                        hour_string = "0" + String.valueOf(hour);
+                    }
                     String time = hour_string + ":" + minute_string;
 
+
                     if (alarmItem == null) {
-                        databaseHelper.insertAlarmItem(new AlarmItem(time, getDays(), 1, (int) System.currentTimeMillis()));
+                        databaseHelper.insertAlarmItem(new AlarmItem(time, getDays(), 0, (int) System.currentTimeMillis()));
                     } else {
                             alarmItem.setTime(time);
                             alarmItem.setDescription(getDays());

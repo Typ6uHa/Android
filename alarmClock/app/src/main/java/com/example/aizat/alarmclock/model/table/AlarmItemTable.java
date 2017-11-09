@@ -54,6 +54,12 @@ public class AlarmItemTable {
                 " WHERE " + COLUMN_ID + " = " + alarmItem.getId();
     }
 
+    public static String updateSwitch(AlarmItem alarmItem){
+        return "UPDATE " + NAME + " SET "+
+                COLUMN_SWITCH + " = " + alarmItem.isSwitchedOn() +
+                " WHERE " + COLUMN_ID + " = " + alarmItem.getId();
+    }
+
     @NonNull
     public static String getDeleteQuery(){
         return "DELETE FROM " + NAME + ";";

@@ -2,9 +2,12 @@ package com.example.aizat.alarmclock.screen.main.first;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.example.aizat.alarmclock.R;
 import com.example.aizat.alarmclock.model.database.DatabaseHelper;
@@ -44,17 +47,16 @@ class MainAdapter extends RecyclerView.Adapter<MainViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(MainViewHolder holder, int position) {
+    public void onBindViewHolder(final MainViewHolder holder, final int position) {
 
-        AlarmItem alarmItem = alarmItems.get(position);
-
+        final AlarmItem alarmItem = alarmItems.get(position);
         holder.time.setText(String.valueOf(alarmItem.getTime()));
         holder.description.setText(String.valueOf(alarmItem.getDescription()));
         if (alarmItem.isSwitchedOn() == 1){
             holder.switchCompat.setChecked(true);
         } else {
             holder.switchCompat.setChecked(false);
-        };
+        }
     }
 
     @Override

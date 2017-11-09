@@ -3,9 +3,11 @@ package com.example.aizat.alarmclock.screen.main.first;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.aizat.alarmclock.R;
+import com.example.aizat.alarmclock.model.entity.AlarmItem;
 
 /**
  * Created by Aizat on 21.10.2017.
@@ -33,6 +35,14 @@ class MainViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 if(onItemClickListener != null){
                     onItemClickListener.onClick(getAdapterPosition());
+                }
+            }
+        });
+        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onSwitchClick(getAdapterPosition(),switchCompat);
                 }
             }
         });

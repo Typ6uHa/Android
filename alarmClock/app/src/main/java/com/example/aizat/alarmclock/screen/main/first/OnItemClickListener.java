@@ -1,5 +1,7 @@
 package com.example.aizat.alarmclock.screen.main.first;
 
+import android.support.v7.widget.SwitchCompat;
+
 import com.example.aizat.alarmclock.model.entity.AlarmItem;
 
 /**
@@ -8,4 +10,5 @@ import com.example.aizat.alarmclock.model.entity.AlarmItem;
 
 public interface OnItemClickListener {
     void onClick(int position);
+    void onSwitchClick (int position, SwitchCompat switchCompat);
 }
