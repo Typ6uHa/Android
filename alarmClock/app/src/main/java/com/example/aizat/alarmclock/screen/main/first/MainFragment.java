@@ -190,6 +190,9 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
                         String hours = alarmItemList.get(i).getTime().substring(0, 2);
                         String minute = alarmItemList.get(i).getTime().substring(3, 5);
 
+                        if(Calendar.DAY_OF_MONTH < System.currentTimeMillis()){
+                            calendar.set(Calendar.DAY_OF_MONTH,Calendar.DAY_OF_MONTH + 7);
+                        }
                         calendar.set(Calendar.DAY_OF_WEEK, getDayOfWeekToInt((String) item));
                         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
                         calendar.set(Calendar.MINUTE, Integer.parseInt(minute));
@@ -203,10 +206,10 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
 
                         Intent intent = new Intent(getContext(), AlarmOff.class);
                         intent.putExtra("value", alarmItemList.get(i).getId());
-                        pendingIntent = PendingIntent.getBroadcast(getContext(), alarmItemList.get(i).getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        pendingIntent = PendingIntent.getBroadcast(getContext(), alarmItemList.get(i).getId()+getDayOfWeekToInt((String) item), intent, PendingIntent.FLAG_UPDATE_CURRENT);
                         alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-                      //  alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), WEEK,pendingIntent);
+                       // alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), WEEK,pendingIntent);
                     }
                 }
             }

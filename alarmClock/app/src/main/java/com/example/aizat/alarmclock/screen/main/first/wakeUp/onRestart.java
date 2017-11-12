@@ -56,7 +56,7 @@ public class onRestart extends BroadcastReceiver {
 
                         Intent intent1 = new Intent(context, AlarmOff.class);
                         intent.putExtra("value", alarmItemList.get(i).getId());
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarmItemList.get(i).getId(), intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarmItemList.get(i).getId()+getDayOfWeekToInt((String) item), intent1, PendingIntent.FLAG_UPDATE_CURRENT);
                         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                         //  alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), WEEK,pendingIntent);
