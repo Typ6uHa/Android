@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,11 +29,17 @@ import com.example.aizat.alarmclock.screen.base.BaseFragment;
 import com.example.aizat.alarmclock.screen.main.first.wakeUp.AlarmOff;
 import com.example.aizat.alarmclock.screen.main.second.SecondActivity;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * Created by Aizat on 20.10.2017.
  */
 
 class MainFragment extends BaseFragment implements OnItemClickListener{
+
+    private final int WEEK = 604800000;
 
     private final String ALARM_ITEM_REQUEST = "fsfasad";
 
@@ -63,6 +70,7 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
         setHasOptionsMenu(true);
 
         databaseHelper = new DatabaseHelper(getActivity());
+        sendNotification(databaseHelper.selectAlarmItems());
     }
 
     @Override
@@ -129,36 +137,106 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
     @Override
     public void onSwitchClick(int position, SwitchCompat switchCompat) {
         AlarmItem alarmItem = adapter.getAlarmItem(position);
+        String[] alertDays = alarmItem.getDescription().split(" ");
+
+        Locale ru = new Locale("ru");
+        SimpleDateFormat dayFormatter = new SimpleDateFormat("EEEE",ru);
+        String todayText = dayFormatter.format(new Date(System.currentTimeMillis()));
 
         if(switchCompat.isChecked()){
             adapter.getAlarmItem(position).setSwitchedOn(1);
-
-            calendar = Calendar.getInstance();
-            String hours = alarmItem.getTime().substring(0,2);
-            String minute = alarmItem.getTime().substring(3,5);
-
-            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
-            calendar.set(Calendar.MINUTE, Integer.parseInt(minute));
-            calendar.set(Calendar.SECOND, 0);
-
-            Calendar now = Calendar.getInstance();{
-                if(now.after(calendar))
-                    calendar.add(Calendar.HOUR_OF_DAY, 24);
-            }
-            Toast.makeText(getContext(),calendar.getTime().toString(),Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent (getContext(),AlarmOff.class);
-            pendingIntent = PendingIntent.getBroadcast(getContext(),position,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingIntent);
-
+//                for (CharSequence item : alertDays) {
+//                    calendar = Calendar.getInstance();
+//                    String hours = alarmItem.getTime().substring(0, 2);
+//                    String minute = alarmItem.getTime().substring(3, 5);
+//
+//                    calendar.set(Calendar.DAY_OF_WEEK, getDayOfWeekToInt((String) item));
+//                    calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+//                    calendar.set(Calendar.MINUTE, Integer.parseInt(minute));
+//                    calendar.set(Calendar.SECOND, 0);
+//
+//                    Calendar now = Calendar.getInstance();
+//                        if (now.after(calendar) && item.equals(todayText)){
+//                            calendar.set(Calendar.DAY_OF_MONTH,calendar.get(Calendar.DAY_OF_MONTH)+7);
+//                        }
+//                    Toast.makeText(getContext(), calendar.getTime().toString(), Toast.LENGTH_SHORT).show();
+//
+//                    Intent intent = new Intent(getContext(), AlarmOff.class);
+//                    intent.putExtra("value", alarmItem.getId());
+//                    pendingIntent = PendingIntent.getBroadcast(getContext(), alarmItem.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                    alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+//                   // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),WEEK, pendingIntent);
+//            }
         }else{
             adapter.getAlarmItem(position).setSwitchedOn(0);
-            alarmManager.cancel(pendingIntent);
+            if (pendingIntent != null) {
+                alarmManager.cancel(pendingIntent);
+            }
         }
         databaseHelper.updateSwitch(alarmItem);
     }
 
+    private void sendNotification(List<AlarmItem> alarmItemList){
+        Locale ru = new Locale("ru");
+        SimpleDateFormat dayFormatter = new SimpleDateFormat("EEEE",ru);
+        String todayText = dayFormatter.format(new Date(System.currentTimeMillis()));
+        for (int i = 0; i < alarmItemList.size(); i++){
+            if (alarmItemList.get(i).isSwitchedOn() == 1) {
+                String[] alertDays = alarmItemList.get(i).getDescription().split(" ");
+                for (CharSequence item : alertDays) {
+                    if (!item.equals("")) {
+                        calendar = Calendar.getInstance();
+                        String hours = alarmItemList.get(i).getTime().substring(0, 2);
+                        String minute = alarmItemList.get(i).getTime().substring(3, 5);
+
+                        calendar.set(Calendar.DAY_OF_WEEK, getDayOfWeekToInt((String) item));
+                        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+                        calendar.set(Calendar.MINUTE, Integer.parseInt(minute));
+                        calendar.set(Calendar.SECOND, 0);
+
+                        Calendar now = Calendar.getInstance();
+                        if (now.after(calendar) && item.equals(todayText)) {
+                            calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 7);
+                        }
+                        Toast.makeText(getContext(), calendar.getTime().toString(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(getContext(), AlarmOff.class);
+                        intent.putExtra("value", alarmItemList.get(i).getId());
+                        pendingIntent = PendingIntent.getBroadcast(getContext(), alarmItemList.get(i).getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                      //  alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), WEEK,pendingIntent);
+                    }
+                }
+            }
+        }
+    }
 // gregorianCalendar
+    private int getDayOfWeekToInt(String day){
+        if (day.equals("понедельник")) {
+            return 2;
+        }
+        if (day.equals("вторник")) {
+            return 3;
+        }
+        if (day.equals("среда")) {
+            return 4;
+        }
+        if (day.equals("четверг")) {
+            return 5;
+        }
+        if (day.equals("пятница")) {
+            return 6;
+        }
+        if (day.equals("суббота")) {
+            return 7;
+        }
+        if (day.equals("воскресенье")) {
+            return 1;
+        } else {
+            return 999999999;
+        }
+    }
 }
 

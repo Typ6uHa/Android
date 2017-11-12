@@ -3,12 +3,12 @@
     <string name="clear_toolbar">Очистить список</string>
     <string name="choose_days">Выберите дни:</string>
     <string name="description">описание</string>
-    <string name="Monday">Понедельник</string>
-    <string name="Tuesday">Вторник</string>
-    <string name="Wednesday">Среда</string>
+    <string name="Monday">понедельник</string>
+    <string name="Tuesday">вторник</string>
+    <string name="Wednesday">среда</string>
     <string name="Thursday">четверг</string>
-    <string name="Friday">Пятница</string>
-    <string name="Sunday">Воскресенье</string>
-    <string name="Saturday">Суббота</string>
+    <string name="Friday">пятница</string>
+    <string name="Sunday">воскресенье</string>
+    <string name="Saturday">суббота</string>
     <string name="stop">Остановить будильник</string>
 </resources>

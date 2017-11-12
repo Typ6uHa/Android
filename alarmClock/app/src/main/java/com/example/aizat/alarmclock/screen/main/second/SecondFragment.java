@@ -96,7 +96,7 @@ public class SecondFragment extends BaseFragment {
 
 
                     if (alarmItem == null) {
-                        databaseHelper.insertAlarmItem(new AlarmItem(time, getDays(), 0, (int) System.currentTimeMillis()));
+                        databaseHelper.insertAlarmItem(new AlarmItem(time, getDays(), 1, (int) System.currentTimeMillis()));
                     } else {
                             alarmItem.setTime(time);
                             alarmItem.setDescription(getDays());
