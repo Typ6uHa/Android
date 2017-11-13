@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">shrifti</string>
+    <string name="hello_world">Hello world</string>
+
+    <string-array name="URLs">
+        <item>https://i.mycdn.me/i?r=ADGc-AHOhhk0xU4_G5aVlnAECGRm3fig_cX1pJkGgx7jKyFEKHwKiL9QuGcq4J-B13c</item>
+        <item>https://s1.1zoom.ru/big0/930/Coast_Sunrises_and_sunsets_Waves_USA_Ocean_Kaneohe_521540_1280x775.jpg</item>
+        <item>http://cdn.fishki.net/upload/post/2017/03/19/2245758/tn/06-funny-cat-wallpapercat-wallpaper.jpg</item>
+        <item>http://cdn.fishki.net/upload/post/2017/04/21/2273492/2dce7fb4883772576d32a95fcae-prev.jpg</item>
+        <item>https://avatarko.ru/img/kartinka/1/cherep_uzhasy_griby.jpg</item>
+    </string-array>
+    <string-array name="name">
+        <item>изображение 1</item>
+        <item>изображение 2</item>
+        <item>изображение 3</item>
+        <item>изображение 4</item>
+        <item>изображение 5</item>
+    </string-array>
+</resources>

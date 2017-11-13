@@ -215,7 +215,6 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
             }
         }
     }
-// gregorianCalendar
     private int getDayOfWeekToInt(String day){
         if (day.equals("понедельник")) {
             return 2;
