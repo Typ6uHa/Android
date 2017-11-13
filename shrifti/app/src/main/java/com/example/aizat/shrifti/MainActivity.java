@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 // TODO Picasso , GLide
@@ -35,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         name = getResources().getStringArray(R.array.name);
 
+        recyclerView = findViewById(R.id.recycler_view);
         linearLayoutManager = new LinearLayoutManager(this);
         adapter = new Adapter(photos,name);
-        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
     }
