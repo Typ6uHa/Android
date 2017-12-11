@@ -59,4 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void updateSwitch(AlarmItem alarmItem){
         getWritableDatabase().execSQL(AlarmItemTable.updateSwitch(alarmItem));
     }
+    public Cursor selectAlarmItemsCursor(){
+        return getReadableDatabase().rawQuery(AlarmItemTable.getSelectQuery(), null);
+
+    }
 }

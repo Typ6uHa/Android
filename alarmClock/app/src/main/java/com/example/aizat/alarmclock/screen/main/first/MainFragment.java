@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.aizat.alarmclock.R;
+import com.example.aizat.alarmclock.loader.MainPresenter;
+import com.example.aizat.alarmclock.loader.MainView;
 import com.example.aizat.alarmclock.model.database.DatabaseHelper;
 import com.example.aizat.alarmclock.model.entity.AlarmItem;
 import com.example.aizat.alarmclock.screen.base.BaseFragment;
@@ -37,7 +39,7 @@ import java.util.Locale;
  * Created by Aizat on 20.10.2017.
  */
 
-class MainFragment extends BaseFragment implements OnItemClickListener{
+class MainFragment extends BaseFragment implements OnItemClickListener,MainView{
 
     private final int WEEK = 604800000;
 
@@ -57,6 +59,8 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
     private AlarmManager alarmManager;
     private Calendar calendar;
 
+    private MainPresenter presenter;
+
     public static MainFragment newInstance() {
         Bundle data = new Bundle();
         MainFragment fragment = new MainFragment();
@@ -71,6 +75,7 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
 
         databaseHelper = new DatabaseHelper(getActivity());
         sendNotification(databaseHelper.selectAlarmItems());
+        presenter = new MainPresenter(databaseHelper,getLoaderManager(),getActivity(), this);
     }
 
     @Override
@@ -114,16 +119,11 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       if(item.getItemId() == R.id.item_clear){
-           new Handler().post(new Runnable() {
-               @Override
-               public void run() {
-                   databaseHelper.clearAlarmItems();
-                   adapter.setAlarmItems(databaseHelper.selectAlarmItems());
-               }
-           });
-       }
-       return true;
+        if (item.getItemId() == R.id.item_clear) {
+            presenter.clearAll();
+            presenter.loadAlarmItems();
+        }
+        return true;
     }
 
     @Override
@@ -174,7 +174,7 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
                 alarmManager.cancel(pendingIntent);
             }
         }
-        databaseHelper.updateSwitch(alarmItem);
+        presenter.updateSwitch(alarmItem);
     }
 
     private void sendNotification(List<AlarmItem> alarmItemList){
@@ -239,6 +239,11 @@ class MainFragment extends BaseFragment implements OnItemClickListener{
         } else {
             return 999999999;
         }
+    }
+
+    @Override
+    public void onPersonsLoaded(List<AlarmItem> alarmItems) {
+        adapter.setAlarmItems(alarmItems);
     }
 }
 

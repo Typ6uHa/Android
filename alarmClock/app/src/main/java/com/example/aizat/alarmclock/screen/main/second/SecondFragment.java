@@ -20,6 +20,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.aizat.alarmclock.R;
+import com.example.aizat.alarmclock.loader.MainPresenter;
+import com.example.aizat.alarmclock.loader.MainView;
 import com.example.aizat.alarmclock.model.database.DatabaseHelper;
 import com.example.aizat.alarmclock.model.entity.AlarmItem;
 import com.example.aizat.alarmclock.model.table.AlarmItemTable;
@@ -27,12 +29,13 @@ import com.example.aizat.alarmclock.screen.base.BaseFragment;
 import com.example.aizat.alarmclock.screen.main.first.MainActivity;
 
 import java.sql.Blob;
+import java.util.List;
 
 /**
  * Created by Aizat on 21.10.2017.
  */
 
-public class SecondFragment extends BaseFragment {
+public class SecondFragment extends BaseFragment implements MainView {
 
     private final String ALARM_ITEM_REQUEST = "fsfasad";
 
@@ -45,6 +48,8 @@ public class SecondFragment extends BaseFragment {
     private AlarmItem alarmItem;
 
     private Calendar calendar;
+
+    private MainPresenter presenter;
 
     public static SecondFragment newInstance(Bundle data) {
         SecondFragment fragment = new SecondFragment();
@@ -71,6 +76,8 @@ public class SecondFragment extends BaseFragment {
         timePicker = view.findViewById(R.id.time_picker);
         timePicker.setIs24HourView(true);
 
+        presenter = new MainPresenter(databaseHelper,getLoaderManager(),getActivity(),this);
+
         floatingActionButton = view.findViewById(R.id.floating_action_bar1);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -96,12 +103,12 @@ public class SecondFragment extends BaseFragment {
 
 
                     if (alarmItem == null) {
-                        databaseHelper.insertAlarmItem(new AlarmItem(time, getDays(), 1, (int) System.currentTimeMillis()));
+                        presenter.insertAlarmItems(time,getDays());
                     } else {
                             alarmItem.setTime(time);
                             alarmItem.setDescription(getDays());
                             alarmItem.setSwitchedOn(1);
-                            databaseHelper.updateAlarmItem(alarmItem);
+                            presenter.updateQuery(alarmItem);
                         }
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     startActivity(intent);
@@ -145,5 +152,9 @@ public class SecondFragment extends BaseFragment {
         }
 
         return answer+"'";
+    }
+
+    @Override
+    public void onPersonsLoaded(List<AlarmItem> alarmItems) {
     }
 }
